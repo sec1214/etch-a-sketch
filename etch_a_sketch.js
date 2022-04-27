@@ -20,49 +20,30 @@ function makeRows(rows, cols) {
       event.target.style.backgroundColor = "black";
       event.target.style.color = "white";
     });
-
-    eraseAllCellsBtn.addEventListener("click", function () {
-      var elementsToBeErased = document.getElementsByClassName("grid-item");
-      for (var i = 0; i < elementsToBeErased.length; i++) {
-        container.removeChild(elementsToBeErased[i]);
-      }
-      console.log("erase all cells");
-    });
   }
-  /*
-  //function to erase trail
-  eraseTrailBtn.addEventListener("click", function () {
-    var elements = document.getElementsByClassName("grid-item");
-    for (var i = 0; i < elements.length; i++) {
-      elements[i].style.backgroundColor = "white";
-      elements[i].style.color = "black";
-    }
-  });
-  */
-
-  //erasing all of the cells
-
-  /*
-    slider.addEventListener("click", function () {
-      let rowNum = val;
-      let cellNum = val;
-      makeRows(rowNum, cellNum);
-    });
-    */
 }
 
-makeRows(16, 16);
+//function to erase trail
+eraseTrailBtn.addEventListener("click", function () {
+  var elements = document.getElementsByClassName("grid-item");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].style.backgroundColor = "white";
+    elements[i].style.color = "black";
+  }
+});
 
 function changeRowColNum(val) {
+  var elements = document.getElementsByClassName("grid-items");
+  container.replaceChildren();
   let rowNum = val;
   let cellNum = val;
   makeRows(rowNum, cellNum);
 }
 
-createNewGridBtn.onclick = function () {
-  let rowNum = window.prompt("How many rows?");
-  let cellNum = window.prompt("How many cells?");
-
+slider.addEventListener("click", function () {
+  let rowNum = val;
+  let cellNum = val;
   makeRows(rowNum, cellNum);
-  console.log("createNewGridBtn");
-};
+});
+
+makeRows(16, 16);
