@@ -8,16 +8,37 @@
     <title>Etch-A-Sketch</title>
   </head>
   <body>
-    <header>Etch A Sketch </header>
-    <button id="rainbow-btn">rainbow</button>
-    <button id="black-btn">black</button>
-    <button id="clear-btn">clear</button>
-    <div class="wrapper"></div>
-      <div id="container"></div>
+    <div class="wrapper">
+      <div class="wrapper-2">
+        <div class="header">Etch A Sketch</div>
+
+        <div class="container">
+          <div class="container-of-controls">
+            <input
+              id="slider"
+              type="range"
+              min="2"
+              max="16"
+              oninput="changeRowColNum(this.value)"
+            />
+            <button id="rainbow-btn">rainbow</button>
+            <button id="black-btn">black</button>
+            <button id="clear-btn">clear</button>
+          </div>
+          <div class="wrapper-of-container-of-cells">
+            <div id="container-of-cells"></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-2">
+        Powered by
+        <img
+          class="image"
+          src="https://www.theodinproject.com/mstile-310x310.png"
+        />
+      </div>
     </div>
+
     <script type="text/javascript" src="etch-a-sketch-5.js"></script>
-  
-
-
   </body>
 </html>

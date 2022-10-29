@@ -1,9 +1,11 @@
-const container = document.getElementById("container");
+const container = document.getElementById("container-of-cells");
 let clear_btn = document.getElementById("clear-btn");
 let black_btn = document.getElementById("black-btn");
 let rainbow_btn = document.getElementById("rainbow-btn");
 let elements = document.getElementsByClassName("grid-item");
+let slider = document.getElementById("slider");
 let luminosity = "";
+let startValue = 16;
 
 clear_btn.addEventListener("click", resetParameters);
 rainbow_btn.addEventListener("click", rainbowDiv);
@@ -13,13 +15,13 @@ function setDivToBlack() {
   for (let i = 0; i < elements.length; i++) {
     elements[i].addEventListener("mouseover", function () {
       elements[i].style.backgroundColor = "black";
-      //elements[i].innerHTML = luminosity;
+      console.log(elements[i].innerHTML);
     });
   }
 }
 
 function startProgram() {
-  makeRows(16, 16);
+  makeRows(startValue, startValue);
 
   for (let i = 0; i < elements.length; i++) {
     elements[i].style.backgroundColor = "white";
@@ -27,6 +29,27 @@ function startProgram() {
       if (elements[i].style.backgroundColor == "white") {
         elements[i].style.backgroundColor = "black";
         elements[i].style.color = "white";
+        console.log("was white now black");
+      } else if (elements[i].style.backgroundColor != "black") {
+        elements[i].innerHTML -= 5;
+      }
+    });
+  }
+}
+
+function changeRowColNum(val) {
+  //var elements = document.getElementsByClassName("grid-items");
+  container.replaceChildren();
+  let rowNum = val;
+  let cellNum = val;
+  makeRows(rowNum, cellNum);
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].style.backgroundColor = "white";
+    elements[i].addEventListener("mouseover", function () {
+      if (elements[i].style.backgroundColor == "white") {
+        elements[i].style.backgroundColor = "black";
+        elements[i].style.color = "white";
+        console.log("was white now black");
       } else if (elements[i].style.backgroundColor != "black") {
         elements[i].innerHTML -= 5;
       }
@@ -41,8 +64,10 @@ function makeRows(rows, cols) {
     let cell = document.createElement("div");
     cell.innerText = i + 1;
     cell.innerHTML = 55;
+
     luminosity = cell.innerHTML;
     cell.style.backgroundcolor = "white";
+
     container.appendChild(cell).className = "grid-item";
   }
 }
@@ -80,6 +105,10 @@ function rainbowDiv() {
       if (elements[i].innerHTML < 0) {
         elements[i].innerHTML = 0;
       }
+
+      if (document.getElementById("black-btn").clicked == true) {
+        console.log("clicked " + elements[i].innerHTML);
+      }
     });
   }
 }
@@ -87,13 +116,7 @@ function rainbowDiv() {
 function get_random_hsl() {
   var h = Math.floor(Math.random() * 361);
   var s = 100;
-  //(SATURATION)Math.floor(Math.random() * 101);
   var l = 50;
-
-  // white hsl(0,0%, 100%)
-  // black (0, 0%,0%)
-
-  //(LUMINOSITY)Math.floor(Math.random() * 101);
 
   let currentColor = "hsl(" + h + ", " + s + "%, " + l + "%)";
 
@@ -110,7 +133,6 @@ function get_random_hsl() {
   }
 
   return currentColor;
-  //"hsl(" + h + ", " + s + "%, " + l + "%)"; // hsl(263, 11%, 90%)
 }
 
 function RGBToHSL(r, g, b) {
@@ -156,3 +178,11 @@ function RGBToHSL(r, g, b) {
 
   return "hsl(" + h + "," + s + "%," + l + "%)";
 }
+
+/*
+slider.addEventListener("click", function () {
+  let rowNum = val;
+  let cellNum = val;
+  makeRows(rowNum, cellNum);
+});
+*/
